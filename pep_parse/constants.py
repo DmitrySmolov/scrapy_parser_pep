@@ -13,5 +13,19 @@ STATUS_SUM_CSV_NAME = (
 )
 STATUS_SUM_CSV_PATH = os.path.join(RESULTS_DIR, STATUS_SUM_CSV_NAME)
 
-# шаблон поиска номера и имени PEP в заголовке статьи каждого PEP
+# шаблоны поиска номера и имени PEP в статье каждого PEP
 PEP_NUM_NAME_PATTERN = r'PEP (?P<number>\d+) – (?P<name>.+)'
+PEP_NUM_PATTERN = r'PEP (?P<number>\d+) –'
+PEP_NUM_IN_URL_PATTERN = r'pep-(\d+)/$'
+
+
+class CssSelector:
+    PEPS = 'section[id="numerical-index"] tbody tr[class^="row-"]'
+    PEP_LINKS = 'a::attr(href)'
+    TITLE = 'h1.page-title::text'
+
+
+class XpathSelector:
+    STATUS = (
+        "//dt[contains(., 'Status')]/following-sibling::dd[1]/abbr/text()"
+    )

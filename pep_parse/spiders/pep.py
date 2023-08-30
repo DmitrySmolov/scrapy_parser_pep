@@ -33,11 +33,12 @@ class PepSpider(Spider):
             logging.info(msg=message)
             number = re.search(pattern=PEP_NUM_IN_URL_PATTERN,
                                string=response.url)
+            number = str(int(number))
             name = title
-        number = pep_match.group('number')
-        if len(pep_match.groups()) == 2:
-            name = pep_match.group('name')
         else:
-            name = title
+            number = pep_match.group('number')
+            name = pep_match.group('name') if len(
+                pep_match.groups()
+            ) == 2 else title
         status = response.xpath(XpathSelector.STATUS).get()
         yield PepParseItem(number=number, name=name, status=status)

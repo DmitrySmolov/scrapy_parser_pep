@@ -1,7 +1,8 @@
 from collections import Counter
 import csv
+import os
 
-from pep_parse.constants import BASE_DIR, STATUS_SUM_CSV_PATH
+from pep_parse.constants import BASE_DIR, STATUS_SUM_CSV_NAME
 from pep_parse.settings import ENCODING
 
 
@@ -13,7 +14,8 @@ class PepParsePipeline:
     def open_spider(self, spider):
         results_dir = BASE_DIR / 'results'
         results_dir.mkdir(exist_ok=True)
-        self.summary_file = open(file=STATUS_SUM_CSV_PATH, mode='w',
+        status_sum_csv_path = os.path.join(results_dir, STATUS_SUM_CSV_NAME)
+        self.summary_file = open(file=status_sum_csv_path, mode='w',
                                  newline='', encoding=ENCODING)
         self.summary_writer = csv.writer(self.summary_file)
         self.summary_writer.writerow(['Статус', 'Количество'])
@@ -23,12 +25,6 @@ class PepParsePipeline:
         return item
 
     def close_spider(self, spider):
-        results_dir = BASE_DIR / 'results'
-        results_dir.mkdir(exist_ok=True)
-        self.summary_file = open(file=STATUS_SUM_CSV_PATH, mode='w',
-                                 newline='', encoding=ENCODING)
-        self.summary_writer = csv.writer(self.summary_file)
-        self.summary_writer.writerow(['Статус', 'Количество'])
         for status, count in self.status_summary.items():
             self.summary_writer.writerow([status, count])
         total_count = sum(self.status_summary.values())

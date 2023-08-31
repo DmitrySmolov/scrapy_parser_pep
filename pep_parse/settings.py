@@ -1,15 +1,17 @@
 BOT_NAME = 'pep_parse'
 
+NEWSPIDER_MODULE = f'{BOT_NAME}.spiders'
+SPIDER_MODULES = [NEWSPIDER_MODULE]
+
 ENCODING = 'utf-8'
 
-SPIDER_MODULES = ['pep_parse.spiders']
-NEWSPIDER_MODULE = 'pep_parse.spiders'
+RES_FILE_FORMAT = 'csv'
 
 ROBOTSTXT_OBEY = True
 
 FEEDS = {
-    'results/pep_%(time)s.csv': {
-        'format': 'csv',
+    f'results/pep_%(time)s.{RES_FILE_FORMAT}': {
+        'format': RES_FILE_FORMAT,
         'fields': ['number', 'name', 'status'],
         'encoding': ENCODING,
         'overwrite': True

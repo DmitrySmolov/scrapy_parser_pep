@@ -48,3 +48,6 @@ Code - Дима Смолов
 
 [Python-url]: https://www.python.org/
 [Python-badge]: https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white
+
+[Scrapy-url]: https://scrapy.org/
+[Scrapy-badge]: https://img.shields.io/badge/Scrapy-64E27C?style=for-the-badge&logo=scrapy&logoColor=white
